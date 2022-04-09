@@ -1,0 +1,79 @@
+{% extends 'dhun/masterpage.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+	<div class="row mt-3">
+	<div class="title">
+			<h3 class="headings">Albums</h3>
+			<a href="{%url 'dhun:seeallalbum'%}">
+			<span class="seeall">See all</span></a>
+		  </div>
+		  <br>
+		<hr>
+		{% for j in data.alb%}
+		
+		<div class="col-sm-3" style="padding-right: 60px; padding-left: 75px; width: 18%;">
+			<div class="card" style="width: 18rem;">
+				<a href="{%url 'dhun:play' j.id%}" ><img height="160" width="200" style="border-radius: 8px 8px 8px 8px;" src="{{j.album_logo.url}}" class="card-img-top" alt="..."></a>
+				<div class="card-body">
+					<a href="{%url 'dhun:play' j.id%}" ><h5 class="card-title"><b>{{j.album_name}} by {{j.artist_name}}</b></h5></a>
+				</div>
+			</div>
+		</div> 
+		{%endfor%}
+	</div>
+</div>
+</div>
+<br>
+
+<div class="container-fluid">
+	<div class="row mt-3">
+	<div class="title">
+			<h3 class="headings">Trending Songs</h3>
+			<a href="{%url 'dhun:seeallsongs'%}">
+			<span class="seeall">See all</span></a>
+		  </div>
+		  <br>
+		<hr>
+		{% for j in data.songs%}
+		
+		<div class="col-sm-3" style="padding-right: 60px; padding-left: 75px; width: 18%;">
+			<div class="card" style="width: 18rem;">
+				<a href="{%url 'dhun:play' j.album_id.id%}" ><img height="160" width="200" style="border-radius: 8px 8px 8px 8px;" src="{{j.song_image.url}}" class="card-img-top" alt="..."></a>
+				<div class="card-body">
+					<a href="{%url 'dhun:play' j.album_id.id%}" ><h5 class="card-title"><b>{{j.song_name}}</b></h5></a>
+				</div>
+			</div>
+		</div> 
+		{%endfor%}
+	</div>
+</div>
+</div>
+<br>
+
+<div class="container-fluid">
+	<div class="row mt-3">
+	<div class="title">
+			<h3 class="headings">New Songs</h3>
+			<a href="{%url 'dhun:seeallsongs'%}">
+			<span class="seeall">See all</span></a>
+		  </div>
+		  <br>
+		<hr>
+		{% for j in data.songs%}
+		
+		<div class="col-sm-3" style="padding-right: 60px; padding-left: 75px; width: 18%;">
+			<div class="card" style="width: 18rem;">
+				<a href="{%url 'dhun:play' j.album_id.id%}" ><img height="160" width="200" style="border-radius: 8px 8px 8px 8px;" src="{{j.song_image.url}}" class="card-img-top" alt="..."></a>
+				<div class="card-body">
+					<a href="{%url 'dhun:play' j.album_id.id%}" ><h5 class="card-title"><b>{{j.song_name}}</b></h5></a>
+				</div>
+			</div>
+		</div> 
+		{%endfor%}
+	</div>
+</div>
+
+ 
+{% endblock body %}

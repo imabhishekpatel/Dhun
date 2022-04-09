@@ -1,0 +1,30 @@
+{% extends 'dhun/masterpage.html' %}
+{% block title %}{{data.name}}{% endblock %}
+{% block body %}
+
+
+<div class="container-fluid">
+	<div class="row mt-3">
+	<div class="title">
+			<h3 class="headings">{{data.name}}</h3>
+			<a style="margin-top: -7px; margin-right: 17px; float: right;" href="{%url 'dhun:addalbum'%}" class="btn btn-primary">Add New Album</a>
+			
+		  </div>
+		  <br>
+		<hr>
+		{% for j in data.dt%}
+		
+		<div class="col-sm-3" style="padding-right: 60px; padding-left: 75px; width: 18%;">
+			<div class="card" style="width: 18rem;">
+				<a href="{%url 'dhun:play' j.id%}" ><img height="160" width="200" style="border-radius: 8px 8px 8px 8px;" src="{{j.album_logo.url}}" class="card-img-top" alt="..."></a>
+				<div class="card-body">
+					<a href="{%url 'dhun:play' j.id%}" ><h5 class="card-title"><b>{{j.album_name}} by {{j.artist_name}}</b></h5></a>
+				</div>
+			</div>
+		</div> 
+		{%endfor%}
+	</div>
+</div>
+</div>
+
+{%endblock%}

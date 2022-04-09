@@ -1,0 +1,62 @@
+{% extends 'dhun/masterpage.html' %}
+{% block title %}Playing {{data.album.album_name}}{% endblock %}
+{% block body %}
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="split left">
+        <div class="centered">
+          <img height="350" width="400" style="border-radius: 8px" src="{{data.album.album_logo.url}}">
+          <h4><b>Album: </b>{{data.album.album_name}}</h4>
+          <h4><b>Artist: </b>{{data.album.artist_name}}</h4>
+          <p><b>Genre: </b> {{data.album.album_genre}}</p>
+          {% if request.session.user_log.username == data.album.userid.username%}
+      {%if 'user_log' in request.session%}
+          <a style="margin-left: 90px; float: left;" href="{%url 'dhun:editalbum' data.album.id%}"
+            class="btn btn-primary">Edit Album</a>
+          <a style="margin-right: 93px; float: right;" href="#"
+            class="btn btn-primary">Delete Album</a>
+            {% endif %}
+            {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" style="background: rgb(240, 239, 239); border: 10px; border-radius: 20px;">
+      <h3>Queue</h3>
+      {% if request.session.user_log.username == data.album.userid.username%}
+      {%if 'user_log' in request.session%}<a style="margin-top: -60px; margin-left: 440px;"
+        href="{%url 'dhun:addsong'%}?next={{request.path}}" class="btn btn-primary">Add Song</a>
+      {% endif %}
+      {% endif %}
+      {%for i in data.song%}
+      <div class="player" style="background-color:rgb(240, 239, 239) ;height:105px;">
+        <div class="left"><img src="{{i.song_image.url}}" height="90" width="90" style="border-radius: 10px;"></div>
+        <div class="right">
+          <div>
+            <a class="song"
+              style=" margin-left: 7px; color: rgb(0, 0, 0); font-family:'Times New Roman', Times, serif; font-size: 18px;">{{i.song_name}}</a>
+            {%if 'user_log' in request.session%}
+            {% if request.session.user_log.username == data.album.userid.username%}
+
+            <a href="{%url 'dhun:editsong' i.id%}?next={{request.path}}" class="btn btn-primary">Edit</a>
+            <a href="{%url 'dhun:deletesong' i.id%}" class="btn btn-primary">Delete</a>
+            {% endif %}
+            {% endif %}
+          </div>
+          <audio controls="" name="media" src="{{i.song.url}}" type="audio/mpeg"></audio>
+
+        </div>
+      </div>
+
+      {%endfor%}
+    </div>
+
+  </div>
+
+
+
+  {%endblock%}
