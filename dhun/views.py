@@ -140,4 +140,3 @@ def deletesong(request,pk):
     song=Song.objects.get(id=pk)
     song.delete()
     return redirect('dhun:play')
-print('hello')
